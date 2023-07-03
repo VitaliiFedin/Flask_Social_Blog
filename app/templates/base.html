@@ -35,8 +35,12 @@ type="image/x-icon">
             <li> <a href="{{ url_for('auth.logout') }}">Log Out</a> </li>
         {% else %}
             <li> <a href="{{ url_for('auth.login') }}">Log In</a> </li>
-        {% endif %}
     </ul>
+    <ul class="nav navbar-right">
+        <li> <a href="{{ url_for('auth.register') }}">Register</a> </li>
+    </ul>
+ {% endif %}
+
 </div>
 </div>
 </div>
