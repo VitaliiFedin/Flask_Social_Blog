@@ -30,15 +30,15 @@ type="image/x-icon">
     <ul class="nav navbar-nav">
     <li><a href="/">Home</a></li>
     </ul>
-    <ul class="nav navbar-right">
+    <ul class="nav navbar-right navbar-nav">
         {% if current_user.is_authenticated %}
             <li> <a href="{{ url_for('auth.logout') }}">Log Out</a> </li>
+            <li> <a href="{{url_for('auth.update_password')}}">Update password</a> </li>
         {% else %}
             <li> <a href="{{ url_for('auth.login') }}">Log In</a> </li>
+            <li> <a href="{{ url_for('auth.register') }}">Register</a> </li>
     </ul>
-    <ul class="nav navbar-right">
-        <li> <a href="{{ url_for('auth.register') }}">Register</a> </li>
-    </ul>
+
  {% endif %}
 
 </div>
