@@ -1,6 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request
 from . import auth
-from .forms import LoginForm, RegistrationForm, PasswordUpdateForm, EmailToResetPasswordForm, PasswordResetForm
+from .forms import LoginForm, RegistrationForm, PasswordUpdateForm, EmailToResetPasswordForm, \
+    PasswordResetForm, EmailResetForm
 from flask_login import login_user, current_user
 from ..models import User
 from flask_login import login_required, logout_user
@@ -137,3 +138,27 @@ def password_reset(token):
             return redirect(url_for('main.index'))
     return render_template('auth/reset_password.html', form=form)
 
+
+@auth.route('/email/reset', methods=['POST', 'GET'])
+@login_required
+def update_email():
+    form = EmailResetForm()
+    if form.validate_on_submit():
+        token = current_user.generate_reset_email_token(form.email.data)
+        sent_email(current_user.email, 'Reset Your Email', 'auth/email/reset_email', user=current_user, token=token)
+        flash('A letter with instructions to reset your email has been sent to you.')
+        return redirect(url_for('auth.login'))
+    return render_template('auth/reset_email.html', form=form)
+
+
+@auth.route('/email_reset/<token>', methods=['GET','POST'])
+@login_required
+def email_confirm(token):
+    if current_user.reset_email(token):
+        db.session.commit()
+        flash('You email was successfully changed')
+        logout()
+        return redirect(url_for('auth.login'))
+    else:
+        flash('Error. Your email wasn\'t changed')
+        return redirect(url_for('main.index'))
