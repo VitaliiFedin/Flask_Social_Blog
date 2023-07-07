@@ -1,0 +1,11 @@
+.nav
+ .dropdown{
+    margin-top: 0rem;
+ }
+
+.dropdown-menu{
+    margin-right: -4rem;
+}
+.dropdown-item{
+    text-align: center;
+}
