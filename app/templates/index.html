@@ -6,10 +6,17 @@
     <h1>Hello {% if current_user.is_authenticated %} {{current_user.username}} {% else %} Stranger {% endif %}</h1>
 </div>
 
-<p> The local date and time is {{
-moment(current_time).format('LLL') }}</p>
+<div>
+    {% if current_user.can(Permission.WRITE) %}
+        {{wtf.quick_form(form)}}
+    {% endif %}
+</div>
 
-<p>That was {{ moment(current_time).fromNow(refresh=True) }}
-</p>
+{% include '_posts.html' %}
+
+<div class="time">
+    <h4> The local date and time is {{ moment(current_time).format('LLL') }}</h4>
+    <h5>That was {{ moment(current_time).fromNow(refresh=True) }} </h5>
+</div>
 
 {% endblock %}
