@@ -15,6 +15,7 @@ class Config:
     FLASK_ADMIN = 'vetal270399@gmail.com'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     FLASK_POSTS_PER_PAGE = 10
+    FLASK_FOLLOWERS_PER_PAGE = 5
 
     @staticmethod
     def init_app(app):

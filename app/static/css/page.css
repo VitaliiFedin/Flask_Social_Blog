@@ -53,3 +53,14 @@ div.post-content{
 div.time{
     margin: 16px 0px 0px 0px;
 }
+
+span.label-default{
+    background-color: blue;
+}
+
+a.permalink{
+    text-decoration: none;
+}
+a.edit{
+    text-decoration: none;
+}
