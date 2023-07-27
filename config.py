@@ -37,6 +37,10 @@ class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:fed123321@localhost/test1'
 
 
+class ProductionConfigMysql(Config):
+    SQLALCHEMY_DATABASE_URI = 'mysql://vetal270399:fed123321@vetal270399.mysql.pythonanywhere-services.com/vetal270399$default'
+
+
 config = {
     'development': DevelopmentConfig,
     'testing': TestingConfig,

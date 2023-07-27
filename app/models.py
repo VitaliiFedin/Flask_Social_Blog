@@ -72,6 +72,14 @@ class Role(db.Model):
                 role.add_permission(perm)
             role.default = (role.name == default_role)
             db.session.add(role)
+        admin_role = Role.query.filter_by(name='Administrator').first()
+        default_role = Role.query.filter_by(default=True).first()
+        for u in User.query.all():
+            if u.role is None:
+                if u.email == current_app.config['FLASK_ADMIN']:
+                    u.role = admin_role
+                else:
+                    u.role = default_role
         db.session.commit()
 
     def __repr__(self):
